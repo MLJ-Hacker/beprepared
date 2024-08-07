@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
                 contact = @Contact(
                         name = "Max Macamo",
                         email = "maxmacamo07@gmail.com",
-                        url = ""
+                        url = "https://github.com/MLJ-Hacker"
                 ),
                 license = @License(
                         name = "Apache License 2.0",

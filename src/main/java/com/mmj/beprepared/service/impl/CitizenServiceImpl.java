@@ -31,7 +31,7 @@ public class CitizenServiceImpl implements CitizenService {
     @Transactional
     public String createCitizen(Citizen citizen, Long cityId) {
         if (citizenRepository.existsByPhone(citizen.getPhone())){
-            throw new BadRequestException("Jã  ha um cidadao com esse nú numero!");
+            throw new BadRequestException("Já ha um cidadão com esse número!");
         }
         City city = locationService.getCityById(cityId);
         citizen.setCity(city);
@@ -39,7 +39,7 @@ public class CitizenServiceImpl implements CitizenService {
         citizen.setRole(Role.USER);
         citizen.setOtp(generateOtp(6));
         var savedCitizen = CitizenRepository.save(citizen);
-        return "Cidadão creiadp com sucesso! O seu código de verificação é: "+savedCitizen.getOtp();
+        return "Cidadão criado com sucesso! O seu código de verificação é: "+ savedCitizen.getOtp();
     }
 
     @Override
@@ -75,7 +75,7 @@ public class CitizenServiceImpl implements CitizenService {
         citizen.setVerified(true);
         citizen.setOtp(null);
         citizenRepository.save(citizen);
-        return "A sua conta for verificada com sucesso!";
+        return "A sua conta foi verificada com sucesso!";
     }
 
     @Override
@@ -86,7 +86,7 @@ public class CitizenServiceImpl implements CitizenService {
         citizen.setOtp(null);
         String otp = generateOtp(6);
         citizen.setOtp(passwordEncoder.encode(otp));
-        return "O seu código de acesso é: "+otp;
+        return "O seu código de acesso é: "+ otp;
     }
 
     private  static String generateOtp(int lengh){ /*Metodo para gerar um numero aleatorio*/
