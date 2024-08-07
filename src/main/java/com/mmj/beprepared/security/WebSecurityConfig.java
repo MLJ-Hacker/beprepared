@@ -19,6 +19,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -35,7 +36,7 @@ public class WebSecurityConfig {
               .cors((cors) -> cors
                       .configurationSource(corsConfigurationSource()))
               .authorizeHttpRequests((authorize) -> authorize //fica os end point
-                      .requestMatchers(HttpMethod.POST, "/api/v1/auth/**")
+                      .requestMatchers(POST, "/api/v1/auth/**")
                       .permitAll()//qual quer pessoa podera ver os end points
                       .requestMatchers("/api/v1/citizens/",
                                     "/api/v1/citizens/verify-account",
@@ -61,19 +62,15 @@ public class WebSecurityConfig {
         configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization",
-                "X-Get-Header",
-                "Aceess-Control-Allow-Credentials"));
+                "X-Get-Header", "Access-Control-Allow-Origin",
+                "Access-Control-Allow-Credentials"));
         configuration.setMaxAge(3600L);
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
-
         return source;
 
 
     }
-
-
-
 
 }
